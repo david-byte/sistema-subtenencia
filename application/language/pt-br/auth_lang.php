@@ -21,7 +21,7 @@ $lang['error_csrf'] = 'O envio desse formulario não atendeu a requisitos de seg
 // Login
 $lang['login_heading']         = 'Login';
 $lang['login_subheading']      = 'Por favor entre com seu login/email e senha abaixo.';
-$lang['login_identity_label']  = 'Login/Email:';
+$lang['login_identity_label']  = 'Identidade não confere:';
 $lang['login_password_label']  = 'Senha:';
 $lang['login_remember_label']  = 'Lembre-me:';
 $lang['login_submit_btn']      = 'Login';
