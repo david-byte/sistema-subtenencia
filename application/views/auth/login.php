@@ -24,10 +24,12 @@
             <div class="form-group">
               <?php echo form_label('Identidade:', '', array('class' => 'mt-3')); ?>
               <?php echo form_input($identity, '', array('class' => 'form-control', 'autofocus')); ?>
+              <?php echo form_error('identity') ?>
             </div>
             <div class="form-group">
               <?php echo form_label('Senha:'); ?>
               <?php echo form_input($password, '', array('class' => 'form-control')); ?>
+              <?php echo form_error('identity') ?>
             </div>
             <?php echo form_submit('button', 'Entrar', array('type' => 'submit', 'class' => 'btn btn-md btn-primary')); ?>
             <?php echo form_close(); ?>
