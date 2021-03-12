@@ -1773,6 +1773,25 @@ class Ion_auth_model extends CI_Model
 		return $this->groups();
 	}
 
+	   	public $table = 'groups';
+		public $id = 'id';
+		public $order = 'ASC';
+
+	public function delete_groups($id)
+	{
+		
+
+        $this->db->query("ALTER TABLE " . $this->table);
+        $this->db->where($this->id, $id);
+
+        if ($this->db->delete($this->table)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+        $this->db->query("ALTER TABLE " . $this->table);
+    }
+
 	/**
 	 * update
 	 *
