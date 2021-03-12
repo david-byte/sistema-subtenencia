@@ -1,20 +1,47 @@
-<h1><?php echo lang('edit_group_heading');?></h1>
-<p><?php echo lang('edit_group_subheading');?></p>
+<!-- Main Content -->
+<div id="content">
 
-<div id="infoMessage"><?php echo $message;?></div>
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+            <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo base_url('/'); ?>">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><?php echo $this->data['title']; ?></li>
+                  </ol>
+            </nav>
 
-<?php echo form_open(current_url());?>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                  <div class="card-body">
+                        <!-- Form -->
+                        <?php echo form_open() ?>
+                        <div class="form-group row">
+                              <div class="col-md-4">
+                                    <?php echo form_label('Nome:'); ?>
+                                    <?php echo form_input($group_name, '', array('class' => 'form-control')); ?>
+                                    <?php echo form_error('group_name', '<small class="form-text text-danger">', '</small>'); ?>
+                              </div>
+                              <div class="col-md-4">
+                                    <?php echo form_label('Descrição:') ?>
+                                    <?php echo form_input($group_description, '', array('class' => 'form-control')); ?>
+                                    <?php echo form_error('group_description', '<small class="form-text text-danger">', '</small>'); ?>
+                              </div>
+                              <div class="col-md-4">
+                                    <?php echo form_label('Ativo:') ?>
+                                    <select class="form-control" name="active">
+                                          <option value="0" <?php echo ($group->active == 0 ? 'selected' : ''); ?>>Não</option>
+                                          <option value="1" <?php echo ($group->active == 1 ? 'selected' : ''); ?>>Sim</option>
+                                    </select>
 
-      <p>
-            <?php echo lang('edit_group_name_label', 'group_name');?> <br />
-            <?php echo form_input($group_name);?>
-      </p>
-
-      <p>
-            <?php echo lang('edit_group_desc_label', 'description');?> <br />
-            <?php echo form_input($group_description);?>
-      </p>
-
-      <p><?php echo form_submit('submit', lang('edit_group_submit_btn'));?></p>
-
-<?php echo form_close();?>
+                              </div>
+                        </div>
+                        <?php echo form_submit('button', 'Salvar', array('class' => 'btn btn-sm btn-primary')) ?>
+                        <a title="Voltar" href="<?php echo base_url('auth/group'); ?>" class="btn btn-sm btn-success float-letf">Voltar</a>
+                        <?php echo form_close(); ?>
+                        <!-- End Form -->
+                  </div>
+            </div>
+            <!-- /.container-fluid -->
+      </div>
+      <!-- End of Main Content -->
+</div>
