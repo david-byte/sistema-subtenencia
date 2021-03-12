@@ -772,6 +772,7 @@ class Auth extends CI_Controller
 	 */
 	public function edit_group($id)
 	{
+
 		// bail if no group id given
 		if (!$id || empty($id))
 		{
@@ -795,17 +796,17 @@ class Auth extends CI_Controller
 			if ($this->form_validation->run() === TRUE)
 			{
 				$group_update = $this->ion_auth->update_group($id, $_POST['group_name'], array(
-					'description' => $_POST['group_description']
+					'description' => $_POST['group_description'], 'active' => $_POST['active']
 				));
 
 				if ($group_update)
 				{
-					$this->session->set_flashdata('message', $this->lang->line('edit_group_saved'));
-					redirect("auth", 'refresh');
+					$this->session->set_flashdata('sucesso', 'Dados salvos com suecesso');
+					redirect("auth/group", 'refresh');
 				}
 				else
 				{
-					$this->session->set_flashdata('message', $this->ion_auth->errors());
+					$this->session->set_flashdata('error', 'Erro ao salvar dados');
 				}				
 			}
 		}
@@ -833,7 +834,42 @@ class Auth extends CI_Controller
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		];
 
-		$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'edit_group', $this->data);
+		$this->data['styles'] = [
+			'vendor/datatables/dataTables.bootstrap4.min.css',
+			'css/app.css'
+		];
+
+		$this->data['scripts'] = [
+			'vendor/datatables/jquery.dataTables.min.js',
+			'vendor/datatables/dataTables.bootstrap4.min.js',
+			'vendor/datatables/app.js'
+		];
+		
+		$this->load->view('layout/header', $this->data);
+        $this->load->view('layout/sidebar');
+        $this->load->view('layout/navbar');
+        $this->load->view('auth/edit_group');
+        $this->load->view('layout/footer');
+	}
+
+	public function delete_group($id)
+	{
+		$row = $this->ion_auth->group($id)->row();
+
+		if($row)
+		{
+			$event = $this->ion_auth_model->delete_groups($id);
+
+			if($event === FALSE)
+			{
+				$this->session->set_flashdata('error', 'Dados apagados com suscesso');
+			}
+			else
+			{
+				$this->session->set_flashdata('sucesso', 'Dados salvos com sucesso');
+			}
+		}
+		redirect(site_url('auth/group'));
 	}
 
 	/**
