@@ -693,6 +693,29 @@ class Auth extends CI_Controller
 	/**
 	 * Create a new group
 	 */
+	public function group()
+	{
+		$data = array(
+			'title' => 'Grupos',
+			'start' => '1',
+			'styles' => array(
+                'vendor/datatables/dataTables.bootstrap4.min.css',
+            ),
+            'scripts' => array(
+                'vendor/datatables/jquery.dataTables.min.js',
+                'vendor/datatables/dataTables.bootstrap4.min.js',
+                'vendor/datatables/app.js'
+            ),
+			'groups' => $this->ion_auth->groups()->result()
+		);
+
+		$this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar');
+        $this->load->view('layout/navbar');
+        $this->load->view('auth/list_group');
+        $this->load->view('layout/footer');
+	}
+
 	public function create_group()
 	{
 		$this->data['title'] = $this->lang->line('create_group_title');
